@@ -1,0 +1,17 @@
+<resources>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
+    <dimen name="margin_large">30dp</dimen>
+    <dimen name="margin_huge">46dp</dimen>
+
+    <dimen name="text_size_tiny">4.5sp</dimen>
+    <dimen name="text_size_small">9.5sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">22.5sp</dimen>
+
+</resources>

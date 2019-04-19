@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Movie Database</string>
+
+    <string name="movie">Movie</string>
+    <string name="get_movies">Get Movies</string>
+
+    <string name="fetch_movies_in_last">Fetch movies in last</string>
+    <string name="ten">10</string>
+    <string name="days">days</string>
+
+    <string name="released_on">Released On</string>
+    <string name="languages">Languages</string>
+</resources>

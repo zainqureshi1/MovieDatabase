@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <data>
+        <variable name="movie" type="com.test24i.moviedatabase.models.Movie" />
+    </data>
+
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageViewMoviePoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@{movie.posterUrl}"
+            android:contentDescription="@string/movie"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:id="@+id/textViewMovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageViewMoviePoster"
+            android:layout_alignEnd="@+id/imageViewMoviePoster"
+            android:layout_alignBottom="@+id/imageViewMoviePoster"
+            android:text="@{movie.title}"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@android:color/white"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:background="@android:color/black" />
+
+    </RelativeLayout>
+
+</layout>

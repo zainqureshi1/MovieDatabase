@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<data>
+		<variable
+			name="movie"
+			type="com.test24i.moviedatabase.models.Movie" />
+	</data>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+
+		<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+
+			<!-- Picture -->
+			<ImageView
+				android:id="@+id/imageViewPicture"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:scaleType="centerInside"
+				android:src="@{movie.backdropUrl}"
+				android:contentDescription="@string/movie"
+				android:adjustViewBounds="true" />
+
+			<!-- Title -->
+			<TextView
+				android:id="@+id/textViewTitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingStart="@dimen/margin_medium"
+				android:paddingEnd="@dimen/margin_medium"
+				android:text="@{movie.title}"
+				android:textSize="@dimen/text_size_large"
+				android:textColor="@android:color/white"
+				android:maxLines="2"
+				android:ellipsize="end"
+				android:background="@android:color/black" />
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingStart="@dimen/margin_medium"
+				android:paddingEnd="@dimen/margin_medium" >
+
+				<!-- Genre -->
+				<TextView
+					android:id="@+id/textViewGenres"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_toStartOf="@+id/viewContainerReleaseDate"
+					android:layout_marginBottom="@dimen/margin_tiny"
+					android:text="@{movie.genresString}"
+					android:textSize="@dimen/text_size_medium"
+					android:textStyle="italic"
+					android:textColor="@android:color/darker_gray" />
+
+				<!-- Release Date -->
+				<LinearLayout
+					android:id="@+id/viewContainerReleaseDate"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentEnd="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginBottom="@dimen/margin_tiny"
+					android:orientation="vertical" >
+
+					<TextView
+						android:id="@+id/textViewReleaseDateLabel"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/released_on"
+						android:textSize="@dimen/text_size_small"
+						android:textColor="@android:color/darker_gray" />
+
+					<TextView
+						android:id="@+id/textViewReleaseDate"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@{movie.releaseDate}"
+						android:textSize="@dimen/text_size_medium"
+						android:textColor="@android:color/darker_gray" />
+
+				</LinearLayout>
+
+				<!-- Languages -->
+				<LinearLayout
+					android:id="@+id/viewContainerLanguages"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentEnd="true"
+					android:layout_below="@+id/viewContainerReleaseDate"
+					android:layout_marginBottom="@dimen/margin_tiny"
+					android:orientation="vertical" >
+
+					<TextView
+						android:id="@+id/textViewLanguagesLabel"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/languages"
+						android:textSize="@dimen/text_size_small"
+						android:textColor="@android:color/darker_gray" />
+
+					<TextView
+						android:id="@+id/textViewLanguages"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@{movie.languagesString}"
+						android:textSize="@dimen/text_size_medium"
+						android:textColor="@android:color/darker_gray" />
+
+				</LinearLayout>
+
+			</RelativeLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="@android:color/black" />
+
+			<!-- TagLine -->
+			<TextView
+				android:id="@+id/textViewTagLine"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/margin_medium"
+				android:paddingStart="@dimen/margin_medium"
+				android:paddingEnd="@dimen/margin_medium"
+				android:text="@{movie.tagLine}"
+				android:textSize="@dimen/text_size_medium"
+				android:textColor="@android:color/black"
+				android:textStyle="italic|bold" />
+
+			<!-- Overview -->
+			<TextView
+				android:id="@+id/textViewOverview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/margin_small"
+				android:layout_marginEnd="@dimen/margin_small"
+				android:text="@{movie.overview}"
+				android:textSize="@dimen/text_size_medium"
+				android:textColor="@android:color/black" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</layout>
