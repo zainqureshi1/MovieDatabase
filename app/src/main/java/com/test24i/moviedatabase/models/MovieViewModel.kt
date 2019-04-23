@@ -1,9 +1,13 @@
 package com.test24i.moviedatabase.models
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.view.View
+import com.test24i.moviedatabase.R
 import com.test24i.moviedatabase.helpers.ApiHelper
+import com.test24i.moviedatabase.utils.showSnackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,6 +16,9 @@ import timber.log.Timber
 class MovieViewModel : ViewModel() {
     private var pageToLoad = 1
     private val _movies = arrayListOf<Movie>()
+
+    @SuppressLint("StaticFieldLeak")
+    var snackView: View? = null
 
     var dateGreaterThan: String = ""
     var dateLessThan: String = ""
@@ -36,10 +43,10 @@ class MovieViewModel : ViewModel() {
                 page = pageToLoad,
                 dateGreaterThan = dateGreaterThan,
                 dateLessThan = dateLessThan
-            ).enqueue(object : Callback<ApiHelper.MoviesResponse> {
+            ).enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(
-                    call: Call<ApiHelper.MoviesResponse>,
-                    response: Response<ApiHelper.MoviesResponse>
+                    call: Call<MoviesResponse>,
+                    response: Response<MoviesResponse>
                 ) {
                     if (response.isSuccessful) {
                         val newMovies = response.body()?.results
@@ -48,20 +55,27 @@ class MovieViewModel : ViewModel() {
                             movies.postValue(_movies)
                         }
                         pageToLoad += 1
+                    } else {
+                        snackView?.showSnackbar("Failed to fetch movies", R.string.retry) {
+                            fetchMovies()
+                        }
                     }
                     loading.value = false
                 }
 
-                override fun onFailure(call: Call<ApiHelper.MoviesResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                     Timber.e(t)
                     loading.value = false
+                    snackView?.showSnackbar("Failed to fetch movies: " + t.localizedMessage, R.string.retry) {
+                        fetchMovies()
+                    }
                 }
             })
         } else {
-            ApiHelper.instance.getMovies(page = pageToLoad).enqueue(object : Callback<ApiHelper.MoviesResponse> {
+            ApiHelper.instance.getMovies(page = pageToLoad).enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(
-                    call: Call<ApiHelper.MoviesResponse>,
-                    response: Response<ApiHelper.MoviesResponse>
+                    call: Call<MoviesResponse>,
+                    response: Response<MoviesResponse>
                 ) {
                     if (response.isSuccessful) {
                         val newMovies = response.body()?.results
@@ -70,13 +84,20 @@ class MovieViewModel : ViewModel() {
                             movies.postValue(_movies)
                         }
                         pageToLoad += 1
+                    } else {
+                        snackView?.showSnackbar("Failed to fetch movies", R.string.retry) {
+                            fetchMovies()
+                        }
                     }
                     loading.value = false
                 }
 
-                override fun onFailure(call: Call<ApiHelper.MoviesResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                     Timber.e(t)
                     loading.value = false
+                    snackView?.showSnackbar("Failed to fetch movies: " + t.localizedMessage, R.string.retry) {
+                        fetchMovies()
+                    }
                 }
             })
         }

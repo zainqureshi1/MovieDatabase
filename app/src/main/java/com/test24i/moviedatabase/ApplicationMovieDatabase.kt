@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import com.test24i.moviedatabase.activities.VideoActivity
 import com.test24i.moviedatabase.utils.isTablet
 import timber.log.Timber
 
@@ -15,7 +16,11 @@ class ApplicationMovieDatabase : Application() {
         }
         registerActivityLifecycleCallbacks(object : ActivityLifecycleAdapter() {
             override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
-                activity?.requestedOrientation = if (isTablet()) ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                if (isTablet() || activity is VideoActivity) {
+                    activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                } else {
+                    activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                }
             }
         })
     }

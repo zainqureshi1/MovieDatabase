@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <data>
@@ -28,18 +28,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fetch_movies_in_last" />
+                    android:text="@string/fetch_movies_in_last"
+	                android:labelFor="@+id/editTextDays" />
 
                 <EditText
-                    android:id="@+id/editTextDays"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center"
-                    android:ems="2"
-                    android:inputType="number"
-                    android:text="@string/ten" />
+	                tools:ignore="Autofill"
+	                android:id="@+id/editTextDays"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_marginStart="@dimen/margin_small"
+	                android:layout_marginEnd="@dimen/margin_small"
+	                android:gravity="center"
+	                android:ems="2"
+	                android:inputType="number"
+	                android:text="@string/ten" />
 
                 <TextView
                     android:layout_width="wrap_content"

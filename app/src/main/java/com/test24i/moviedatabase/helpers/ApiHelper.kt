@@ -1,7 +1,7 @@
 package com.test24i.moviedatabase.helpers
 
-import com.google.gson.annotations.SerializedName
 import com.test24i.moviedatabase.models.Movie
+import com.test24i.moviedatabase.models.MoviesResponse
 import com.test24i.moviedatabase.utils.Consts
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -40,8 +40,7 @@ interface ApiHelper {
 
     @GET("movie/{movie_id}")
     fun getMovie(@Path("movie_id") movieId: Int,
+                 @Query("append_to_response") append: String = "videos",
                  @Query("api_key") apiKey: String = Consts.API_KEY): Call<Movie>
-
-    data class MoviesResponse(val page: Int, @SerializedName("total_results") val totalResults: Int, @SerializedName("total_pages") val totalPages: Int, val results: List<Movie>)
 
 }

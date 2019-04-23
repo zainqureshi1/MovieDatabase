@@ -15,6 +15,7 @@ import com.test24i.moviedatabase.adapters.MovieAdapter
 import com.test24i.moviedatabase.databinding.ActivityMainBinding
 import com.test24i.moviedatabase.enums.BackdropSize
 import com.test24i.moviedatabase.enums.PosterSize
+import com.test24i.moviedatabase.helpers.VideoPlayer
 import com.test24i.moviedatabase.models.Movie
 import com.test24i.moviedatabase.models.MovieViewModel
 import com.test24i.moviedatabase.utils.*
@@ -36,10 +37,13 @@ class MainActivity : AppCompatActivity() {
 
         setupViews()
         findSuitableImageSizes()
+        fetchMovies(10)
+        editTextDays.hideKeyboard()
     }
 
     private fun setupViews() {
         viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        viewModel.snackView = binding.root
 
         recyclerViewMovies.layoutManager = layoutManager()
         movieAdapter = MovieAdapter { movie : Movie -> movieClicked(movie) }
@@ -110,14 +114,23 @@ class MainActivity : AppCompatActivity() {
         view.hideKeyboard()
         val days = binding.editTextDays.text.toString().toIntOrNull()
         if (days != null) {
-            val calendar = Calendar.getInstance()
-            val dateNow = Utilities.DateUtils.dateToString(calendar.time)
-            calendar.add(Calendar.DATE, -days)
-            val dateBefore = Utilities.DateUtils.dateToString(calendar.time)
-            viewModel.dateLessThan = dateNow
-            viewModel.dateGreaterThan = dateBefore
-            viewModel.fetchMovies()
+            fetchMovies(days)
         }
+    }
+
+    private fun fetchMovies(daysOld: Int) {
+        val calendar = Calendar.getInstance()
+        val dateNow = Utilities.DateUtils.dateToString(calendar.time)
+        calendar.add(Calendar.DATE, -daysOld)
+        val dateBefore = Utilities.DateUtils.dateToString(calendar.time)
+        viewModel.dateLessThan = dateNow
+        viewModel.dateGreaterThan = dateBefore
+        viewModel.fetchMovies()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        VideoPlayer.getExistingInstance()?.release()
     }
 
 }

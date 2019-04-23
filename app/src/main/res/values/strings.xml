@@ -8,6 +8,9 @@
     <string name="ten">10</string>
     <string name="days">days</string>
 
+    <string name="play_trailer">Play Trailer</string>
     <string name="released_on">Released On</string>
     <string name="languages">Languages</string>
+
+    <string name="retry">Retry</string>
 </resources>

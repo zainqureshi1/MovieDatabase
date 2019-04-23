@@ -60,6 +60,16 @@
 					android:textStyle="italic"
 					android:textColor="@android:color/darker_gray" />
 
+				<!-- Trailer -->
+				<Button
+					android:id="@+id/buttonTrailer"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_below="@+id/textViewGenres"
+					android:text="@string/play_trailer"
+					android:onClick="playTrailerClicked" />
+
 				<!-- Release Date -->
 				<LinearLayout
 					android:id="@+id/viewContainerReleaseDate"

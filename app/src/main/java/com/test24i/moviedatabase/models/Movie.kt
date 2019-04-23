@@ -16,7 +16,8 @@ data class Movie(val id: Int, val title: String, val overview: String,
                  @SerializedName("original_language") val language: String?,
                  val popularity: Float, val runtime: Int?, val status: String?,
                  @SerializedName("tagline") val tagLine: String?, val genres: List<Genre>?,
-                 @SerializedName("spoken_languages") val spokenLanguages: List<SpokenLanguage>?) : Serializable {
+                 @SerializedName("spoken_languages") val spokenLanguages: List<SpokenLanguage>?,
+                 val videos: VideosResult?) : Serializable {
 
     fun getPosterUrl(size: PosterSize) : String = Consts.IMAGES_BASE_URL + size.value + posterPath
 
@@ -56,3 +57,5 @@ data class Movie(val id: Int, val title: String, val overview: String,
     }
 
 }
+
+data class MoviesResponse(val page: Int, @SerializedName("total_results") val totalResults: Int, @SerializedName("total_pages") val totalPages: Int, val results: List<Movie>)
